@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "cn.ssic.tianfangcatering"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //引入小刀因为注解报错解决
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res/layouts/activities',
+                    'src/main/res/layouts/fragments',
+                    'src/main/res/layouts/items',
+                    'src/main/res/layouts/dialogs',
+                    'src/main/res/layouts/customs',
+                    'src/main/res/layouts/includes',
+                    'src/main/res'
+            ]
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$rootProject.appcompatv7Version"
+    implementation "com.android.support:design:$rootProject.appcompatv7Version"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintlayoutVersion"
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressocoreVersion"
+
+    //小刀工具
+    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+
+    //retrofit相关
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.convertergsonVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.adapterrxjavaVersion"
+    implementation "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
+
+    //okhttp3
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+
+    //日志拦截器
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.logginginterceptorVersion"
+
+    //防止内存泄露，使订阅者生命周期一致
+    implementation "com.trello:rxlifecycle:$rootProject.rxlifecycleVersion"
+    implementation "com.trello:rxlifecycle-components:$rootProject.rxlifecyclecomponentsVersion"
+
+    //支持json动画加载控件
+    implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
+}
